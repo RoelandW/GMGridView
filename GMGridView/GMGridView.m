@@ -501,6 +501,14 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     else if (gestureRecognizer == _longPressGesture)
     {
         valid = (self.sortingDelegate || self.enableEditOnLongPress) && !isScrolling && !self.isEditing;
+		
+		if (valid && [self.sortingDelegate respondsToSelector:@selector(GMGridView:canMoveItemAtIndex:)]) {
+			
+			CGPoint locationTouch = [_tapGesture locationInView:self];
+            NSInteger position = [self.layoutStrategy itemPositionFromLocation:locationTouch];
+			
+			valid = [self.sortingDelegate GMGridView:self canMoveItemAtIndex:position];
+		}
     }
     else if (gestureRecognizer == _sortingPanGesture) 
     {
@@ -775,6 +783,14 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     int position = [self.layoutStrategy itemPositionFromLocation:point];
     int tag = position + kTagOffset;
     
+	if ([self.sortingDelegate respondsToSelector:@selector(GMGridView:canMoveItemAtIndex:)])
+	{
+		BOOL canMoveItem = [self.sortingDelegate GMGridView:self canMoveItemAtIndex:position];
+		if (!canMoveItem) {
+			return;
+		}
+	}
+	
     if (position != GMGV_INVALID_POSITION && position != _sortFuturePosition && position < _numberTotalItems) 
     {
         BOOL positionTaken = NO;
