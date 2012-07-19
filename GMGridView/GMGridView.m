@@ -727,9 +727,9 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     _sortFuturePosition = _sortMovingItem.tag - kTagOffset;
     _sortMovingItem.tag = 0;
     
-    if ([self.sortingDelegate respondsToSelector:@selector(GMGridView:didStartMovingCell:)])
+    if ([self.sortingDelegate respondsToSelector:@selector(GMGridView:didStartMovingCell:index:)])
     {
-        [self.sortingDelegate GMGridView:self didStartMovingCell:_sortMovingItem];
+        [self.sortingDelegate GMGridView:self didStartMovingCell:_sortMovingItem index:position];
     }
     
     if ([self.sortingDelegate respondsToSelector:@selector(GMGridView:shouldAllowShakingBehaviorWhenMovingCell:atIndex:)]) 
@@ -765,9 +765,9 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
                          _sortMovingItem.frame = newFrame;
                      }
                      completion:^(BOOL finished){
-                         if ([self.sortingDelegate respondsToSelector:@selector(GMGridView:didEndMovingCell:)])
+                         if ([self.sortingDelegate respondsToSelector:@selector(GMGridView:didEndMovingCell:index:)])
                          {
-                             [self.sortingDelegate GMGridView:self didEndMovingCell:_sortMovingItem];
+                             [self.sortingDelegate GMGridView:self didEndMovingCell:_sortMovingItem index:_sortFuturePosition];
                          }
                          
                          _sortMovingItem = nil;
