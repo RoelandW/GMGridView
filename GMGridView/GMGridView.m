@@ -146,6 +146,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 @synthesize editing = _editing;
 @synthesize enableEditOnLongPress;
 @synthesize disableEditOnEmptySpaceTap;
+@synthesize shouldRecognizeSimultaneouslyWithGestureRecognizer = _shouldRecognizeSimultaneouslyWithGestureRecognizer;
 
 @synthesize itemsSubviewsCacheIsValid = _itemsSubviewsCacheIsValid;
 @synthesize itemSubviewsCache;
@@ -253,7 +254,8 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     _sortFuturePosition = GMGV_INVALID_POSITION;
     _itemSize = CGSizeZero;
     _centerGrid = YES;
-    
+	_shouldRecognizeSimultaneouslyWithGestureRecognizer = YES;
+	
     _lastScale = 1.0;
     _lastRotation = 0.0;
     
@@ -479,7 +481,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    return YES;
+    return _shouldRecognizeSimultaneouslyWithGestureRecognizer;
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
