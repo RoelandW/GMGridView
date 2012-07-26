@@ -109,7 +109,6 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 - (NSArray *)itemSubviews;
 - (GMGridViewCell *)cellForItemAtIndex:(NSInteger)position;
 - (GMGridViewCell *)newItemSubViewForPosition:(NSInteger)position;
-- (NSInteger)positionForItemSubview:(GMGridViewCell *)view;
 - (void)setSubviewsCacheAsInvalid;
 - (CGRect)rectForPoint:(CGPoint)point inPaggingMode:(BOOL)pagging;
 
