@@ -47,7 +47,8 @@ typedef enum
 	GMGridViewScrollPositionNone,
 	GMGridViewScrollPositionTop,
 	GMGridViewScrollPositionMiddle,
-	GMGridViewScrollPositionBottom
+	GMGridViewScrollPositionBottom,
+	GMGridViewScrollPositionLeft
 } GMGridViewScrollPosition;
 
 typedef enum
