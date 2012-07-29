@@ -1627,15 +1627,24 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
             case GMGridViewScrollPositionBottom:
                 targetRect.origin.y = MAX((CGFloat)floorf(gridRect.origin.y - (targetRect.size.height - gridRect.size.height)), 0.0);
                 break;
+
+			case GMGridViewScrollPositionLeft:
+				targetRect.origin.x = gridRect.origin.x;
+				break;
         }
     }
-    
+
     // Better performance animating ourselves instead of using animated:YES in scrollRectToVisible
     [UIView animateWithDuration:animated ? kDefaultAnimationDuration : 0
                           delay:0
                         options:kDefaultAnimationOptions
                      animations:^{
-                         [self scrollRectToVisible:targetRect animated:NO];
+						 if (scrollPosition == GMGridViewScrollPositionLeft && (targetRect.origin.x + targetRect.size.width) <= self.contentSize.width - self.frame.size.width) {
+							 [self setContentOffset:CGPointMake(targetRect.origin.x, targetRect.origin.y) animated:NO];
+						 }
+						 else {
+							 [self scrollRectToVisible:targetRect animated:NO];
+						 }
                      } 
                      completion:^(BOOL finished){
                      }
